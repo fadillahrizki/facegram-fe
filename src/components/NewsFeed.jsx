@@ -51,7 +51,7 @@ export default function NewsFeed() {
         <div key={post.id} ref={idx === posts.length - 1 ? lastPostRef : null} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           {post.attachments[0] && (
             <img
-              src={`http://localhost:8000/storage/${post.attachments[0].storage_path}`}
+              src={`${import.meta.env.VITE_STORAGE_URL}/${post.attachments[0].storage_path}`}
               alt="Post"
               className="rounded-t-lg"
             />

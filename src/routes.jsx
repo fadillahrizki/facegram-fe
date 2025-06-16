@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
-import UploadPost from './components/UploadPost';
+import CreatePost from './components/CreatePost';
 import NewsFeed from './components/NewsFeed';
 import Notifications from './components/Notification';
 import Users from './components/Users';
@@ -23,7 +23,7 @@ export default function AppRoutes() {
         <Route path="/register" element={isLoggedIn ? <Navigate to="/profile/me" /> : <Register />} />
         <Route path="/profile/:username" element={<RequireAuth><Profile /></RequireAuth>} />
         <Route path="/newsfeed" element={<RequireAuth><NewsFeed /></RequireAuth>} />
-        <Route path="/upload" element={<RequireAuth><UploadPost /></RequireAuth>} />
+        <Route path="/create-post" element={<RequireAuth><CreatePost /></RequireAuth>} />
         <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
         <Route path="/notifications" element={<RequireAuth><Notifications /></RequireAuth>} />
       </Routes>

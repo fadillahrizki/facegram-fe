@@ -44,6 +44,9 @@ export default function Navbar() {
           <Link to="/profile/me" className={`cursor-pointer text-gray-600 hover:text-gray-900 ${currentRoute === '/profile/me' ? 'font-bold' : ''}`}>
             <li>Profile</li>
           </Link>
+          <Link to="/create-post" className={`cursor-pointer text-gray-600 hover:text-gray-900 ${currentRoute === '/create-post' ? 'font-bold' : ''}`}>
+            <li>Create Post</li>
+          </Link>
           <Link to="/users" className={`cursor-pointer text-gray-600 hover:text-gray-900 ${currentRoute === '/users' ? 'font-bold' : ''}`}>
             <li>Users</li>
           </Link>

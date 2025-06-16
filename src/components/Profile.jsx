@@ -98,7 +98,7 @@ export default function Profile() {
               <div key={post.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
                 {post.attachments[0] && (
                   <img
-                    src={`http://localhost:8000/storage/${post.attachments[0].storage_path}`}
+                    src={`${import.meta.env.VITE_STORAGE_URL}/${post.attachments[0].storage_path}`}
                     alt="Post"
                     className="rounded-t-lg"
                   />
