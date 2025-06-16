@@ -1,13 +1,17 @@
 import { Link, useLocation } from 'react-router';
 import api from '../api/api';
 import { useEffect, useRef, useState } from 'react';
+import Loading from './Loading';
 
 export default function Navbar() {
   const [notifications, setNotifications] = useState([]);
   const currentRoute = useLocation().pathname;
   const navbar = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const handleLogout = () => {
+    if (loading) return;
+    setLoading(true);
     api.post('/auth/logout')
       .then(() => {
         localStorage.clear();
@@ -15,6 +19,8 @@ export default function Navbar() {
       })
       .catch(err => {
         console.error('Logout failed', err);
+      }).finally(() => {
+        setLoading(false);
       });
   }
 
@@ -65,7 +71,7 @@ export default function Navbar() {
             <Link to="/notifications" className={`py-2 px-3 rounded-sm  md:border-0  ${currentRoute === '/notifications' ? 'text-white bg-blue-700' : 'text-gray-600 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700'}`}>
               <li>Notifications {notifications.length ? <span className="bg-red-500 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">{notifications.length}</span> : null}</li>
             </Link>
-            <li className="py-2 px-3 rounded-sm text-gray-600 cursor-pointer hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 " onClick={handleLogout}>Logout</li>
+            <li className="py-2 px-3 rounded-sm text-gray-600 cursor-pointer hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700" onClick={handleLogout}>{loading? <Loading /> : 'Logout'}</li>
           </ul>
         </div>
       </div>
