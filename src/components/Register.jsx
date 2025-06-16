@@ -21,7 +21,7 @@ export default function Register() {
     try {
       const res = await api.post('/auth/register', form);
       localStorage.setItem('token', res.data.token);
-      window.open(`/profile/${res.data.user.username}`, '_self');
+      window.open(`/profile/me`, '_self');
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors);

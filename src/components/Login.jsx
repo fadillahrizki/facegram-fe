@@ -19,7 +19,7 @@ export default function Login() {
       const res = await api.post('/auth/login', form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
-      window.open(`/profile/${res.data.user.username}`, '_self');
+      window.open(`/profile/me`, '_self');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
