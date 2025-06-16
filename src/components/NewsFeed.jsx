@@ -48,7 +48,7 @@ export default function NewsFeed() {
     <>
     <Navbar />
     <div className="p-5 flex flex-col gap-4 max-w-sm mx-auto">
-      {posts.map((post) => <Post post={post} lastPostRef={lastPostRef} key={post.id} />)}
+      {posts.map((post, idx) => <div key={post.id} ref={idx === posts.length - 1 ? lastPostRef : null}><Post post={post} /></div>)}
       {loading && (
         <div className="text-center mt-5"><Loading isScreen={true}/></div>
       )}
