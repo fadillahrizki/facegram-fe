@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import api from '../api/api';
 import Navbar from './Navbar';
 import Loading from './Loading';
+import Post from './Post';
 
 export default function Profile() {
   const { username } = useParams();
@@ -61,8 +62,8 @@ export default function Profile() {
         <div className="text-center mt-5">User not found.</div>
       )}
       {user && !loading && (
-        <div className="p-4 flex flex-col gap-4">
-          <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="p-4 flex flex-col gap-4 max-w-sm mx-auto">
+          <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
             <h3 className="text-md font-bold tracking-tight text-gray-500">@{user.username}</h3>
             <h5 className='text-2xl font-bold tracking-tight text-gray-700'>{user.full_name}</h5>
             <p className="font-normal text-gray-700">{user.bio}</p>
@@ -94,20 +95,7 @@ export default function Profile() {
           </div>
 
           {(!user.is_private || user.is_your_account || user.following_status === 'following') ? (
-            user.posts.length > 0 ? user.posts.map(post => (
-              <div key={post.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                {post.attachments[0] && (
-                  <img
-                    src={`${import.meta.env.VITE_STORAGE_URL}/${post.attachments[0].storage_path}`}
-                    alt="Post"
-                    className="rounded-t-lg"
-                  />
-                )}
-                <div className="p-5">
-                    <p className="font-normal text-gray-700">{post.caption}</p>
-                </div>
-              </div>
-            )) : <div className="text-gray-700">No posts yet.</div>
+            user.posts.length > 0 ? user.posts.map(post => <Post post={post} key={post.id} />) : <div className="text-gray-700">No posts yet.</div>
           ) : (
             <div className="text-gray-700">This account is private.</div>
           )}

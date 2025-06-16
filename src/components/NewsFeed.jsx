@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import api from '../api/api';
 import Navbar from './Navbar';
 import Loading from './Loading';
+import Post from './Post';
 
 export default function NewsFeed() {
   const [posts, setPosts] = useState([]);
@@ -46,23 +47,8 @@ export default function NewsFeed() {
   return (
     <>
     <Navbar />
-    <div className="p-5 flex flex-col gap-4">
-      {posts.map((post, idx) => (
-        <div key={post.id} ref={idx === posts.length - 1 ? lastPostRef : null} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          {post.attachments[0] && (
-            <img
-              src={`${import.meta.env.VITE_STORAGE_URL}/${post.attachments[0].storage_path}`}
-              alt="Post"
-              className="rounded-t-lg"
-            />
-          )}
-          <div className="p-5">
-            <h5 className="font-bold text-gray-700 dark:text-white">{post.user.full_name} (@{post.user.username})</h5>
-            <p className="font-normal text-gray-700 dark:text-white">{post.caption}</p>
-            <small className="font-small text-gray-500 dark:text-gray-100">{new Date(post.created_at).toLocaleString()}</small>
-          </div>
-        </div>
-      ))}
+    <div className="p-5 flex flex-col gap-4 max-w-sm mx-auto">
+      {posts.map((post) => <Post post={post} lastPostRef={lastPostRef} key={post.id} />)}
       {loading && (
         <div className="text-center mt-5"><Loading isScreen={true}/></div>
       )}
