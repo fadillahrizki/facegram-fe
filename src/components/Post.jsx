@@ -5,7 +5,8 @@ export default function Post({ post }) {
             <img
             src={`${import.meta.env.VITE_STORAGE_URL}/${post.attachments[0].storage_path}`}
             alt="Post"
-            className="rounded-t-lg w-full"
+            className="rounded-t-lg w-full max-h-96 object-cover"
+            loading="lazy"
             />
         )}
         <div className="p-5">
