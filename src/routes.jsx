@@ -6,6 +6,7 @@ import CreatePost from './components/CreatePost';
 import NewsFeed from './components/NewsFeed';
 import Notifications from './components/Notification';
 import Users from './components/Users';
+import { Analytics } from "@vercel/analytics/react"
 
 const isLoggedIn = !!localStorage.getItem('token');
 
@@ -17,6 +18,7 @@ const RequireAuth = ({ children }) => {
 export default function AppRoutes() {
   return (
     <Router>
+      <Analytics />
       <Routes>
         <Route path="/" element={<Navigate to={isLoggedIn ? "/profile/me" : "/login"} />} />
         <Route path="/login" element={isLoggedIn ? <Navigate to="/profile/me" /> : <Login />} />
