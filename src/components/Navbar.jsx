@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white border border-gray-200">
       <div className="flex flex-wrap items-center justify-between w-full p-4">
-        <a href="https://flowbite.com/" className="flex items-center space-x-3 mb-2">
+        <a href="/newsfeed" className="flex items-center space-x-3 mb-2">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">Facegram</span>
         </a>
