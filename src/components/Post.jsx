@@ -104,8 +104,19 @@ export default function Post({ post }) {
           {post.comments.map(comment => (
               <li key={comment.id}>
                   <div className="flex flex-col gap-1 py-2 px-5 text-sm">
-                      <Link to={`/profile/${comment.user.username}`} className="font-medium text-gray-900 max-w-min truncate">{comment.user.username}</Link>
-                      <p>{comment.content}</p>
+                    <div className='flex gap-2'>
+                      <div className={"flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-600 rounded-full"}>
+                          <span className="font-medium text-gray-100 h-full text-center flex items-center">
+                          {(
+                              comment.user.profile_picture ? <img className='h-full object-cover object-center' src={`${import.meta.env.VITE_STORAGE_URL}/${comment.user.profile_picture.storage_path}`} alt={comment.user.full_name} /> :  comment.user.full_name[0].toUpperCase()
+                          )}
+                          </span>
+                      </div>
+                      <div>
+                          <Link to={`/profile/${comment.user.username}`} className="font-medium text-gray-900 max-w-min truncate hover:underline">{comment.user.username}</Link>
+                          <p>{comment.content}</p>
+                      </div>
+                    </div>
                   </div>
               </li>
           ))}

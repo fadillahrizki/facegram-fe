@@ -43,12 +43,23 @@ export default function Users() {
                     <li key={user.id}>
                         <div className="flex items-center justify-between p-3">
                             <Link to={`/profile/${user.username}`}>
-                                <p className="text-sm font-medium text-gray-900 truncate">
-                                    {user.full_name}
-                                </p>
-                                <p className="text-sm text-gray-500 truncate">
-                                    @{user.username}
-                                </p>
+                            <div className='flex gap-2'>
+                                <div className={"flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-600 rounded-full"}>
+                                    <span className="font-medium text-gray-100 h-full text-center flex items-center">
+                                    {(
+                                        user.profile_picture ? <img className='h-full object-cover object-center' src={`${import.meta.env.VITE_STORAGE_URL}/${user.profile_picture.storage_path}`} alt={user.full_name} /> :  user.full_name[0].toUpperCase()
+                                    )}
+                                    </span>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-gray-900 truncate">
+                                        {user.full_name}
+                                    </p>
+                                    <p className="text-sm text-gray-500 truncate">
+                                        @{user.username}
+                                    </p>
+                                </div>
+                            </div>
                             </Link>
                             <div className="flex items-center gap-3">
                             {/* {!user.is_rejected && !user.is_accepted ? <span className="text-sm text-blue-500">Requested</span> : null} */}

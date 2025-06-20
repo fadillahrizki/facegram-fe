@@ -121,7 +121,7 @@ export default function Profile() {
 
             <div className='relative'>
               <input type="file" name="profile_picture" ref={profilePictureRef} accept="image/*" className='hidden' onChange={handleChangeProfilePicture}/>
-              <div className={"absolute top-0 right-0 inline-flex items-center justify-center w-20 h-20 overflow-hidden bg-gray-600 rounded-full " + (user.is_your_account ? "hover:bg-gray-800 cursor-pointer" : "")} onClick={()=> user.is_your_account ? profilePictureRef.current.click() : null}>
+              <div className={"absolute top-0 right-0 flex items-center justify-center w-20 h-20 overflow-hidden bg-gray-600 rounded-full " + (user.is_your_account ? "hover:bg-gray-800 cursor-pointer" : "")} onClick={()=> user.is_your_account ? profilePictureRef.current.click() : null}>
                   <span className="font-medium text-gray-100 h-full text-center flex items-center">
                     {loadingProfilePicture ? <Loading /> : (
                       user.profile_picture ? <img className='h-full object-cover object-center' src={`${import.meta.env.VITE_STORAGE_URL}/${user.profile_picture.storage_path}`} alt={user.full_name} /> :  user.full_name[0].toUpperCase()
