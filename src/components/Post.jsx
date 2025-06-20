@@ -104,7 +104,7 @@ export default function Post({ post }) {
           {post.comments.map(comment => (
               <li key={comment.user.id}>
                   <div className="flex flex-col gap-1 p-3 text-sm">
-                      <Link to={`/profile/${comment.user.username}`} className="font-medium text-gray-900 max-w-min">{comment.user.full_name}</Link>
+                      <Link to={`/profile/${comment.user.username}`} className="font-medium text-gray-900 max-w-min truncate">{comment.user.username}</Link>
                       <p>{comment.content}</p>
                   </div>
               </li>
