@@ -70,6 +70,13 @@ export default function Profile() {
     }
   }
 
+  const removedPost = (post) => {
+    setUser({
+      ...user,
+      posts: user.posts.filter(p=>p.id!=post.id)
+    })
+  }
+
   return (
     <>
       <Navbar />
@@ -133,7 +140,7 @@ export default function Profile() {
           </div>
 
           {(!user.is_private || user.is_your_account || user.following_status === 'following') ? (
-            user.posts.length > 0 ? user.posts.map(post => <Post post={post} key={post.id} />) : <div className="text-gray-700">No posts yet.</div>
+            user.posts.length > 0 ? user.posts.map(post => <Post removedPost={removedPost} post={post} key={post.id} />) : <div className="text-gray-700">No posts yet.</div>
           ) : (
             <div className="text-gray-700">This account is private.</div>
           )}

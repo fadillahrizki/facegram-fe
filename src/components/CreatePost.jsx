@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import api from '../api/api';
 import Navbar from './Navbar';
 import Loading from './Loading';
+import { showToast } from './Toast';
 
 export default function CreatePost() {
   const [caption, setCaption] = useState('');
@@ -34,6 +35,7 @@ export default function CreatePost() {
       await api.post('/posts', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+      showToast("Success to create post")
       navigate('/profile/me'); // atau refresh halaman
     } catch (err) {
       if (err.response?.status === 422) {

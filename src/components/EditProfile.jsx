@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import api from '../api/api';
 import Loading from './Loading';
 import Navbar from './Navbar';
+import { showToast } from './Toast';
+import { useNavigate } from 'react-router';
 
 export default function EditProfile() {
   const [form, setForm] = useState({
@@ -10,6 +12,7 @@ export default function EditProfile() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false)
   const [user] = useState(JSON.parse(localStorage.getItem("user")))
+  const navigate = useNavigate()
 
   const handleChange = e => {
     const { name, value, type, checked } = e.target;
@@ -23,7 +26,8 @@ export default function EditProfile() {
     try {
       const res = await api.put('/users/update', form);
       localStorage.setItem('user', JSON.stringify(res.data.user));
-      window.open(`/profile/me`, '_self');
+      showToast("Success to update profile")
+      navigate(`/profile/me`);
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import api from '../api/api';
 import Loading from './Loading';
+import { showToast } from './Toast';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -22,6 +23,7 @@ export default function Register() {
       const res = await api.post('/auth/register', form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
+      showToast("Register Success")
       window.open(`/profile/me`, '_self');
     } catch (err) {
       if (err.response?.status === 422) {

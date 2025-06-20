@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import api from '../api/api';
 import Loading from './Loading';
+import { showToast } from './Toast';
 
 export default function Login() {
   const [form, setForm] = useState({ username: '', password: '' });
@@ -19,6 +20,7 @@ export default function Login() {
       const res = await api.post('/auth/login', form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
+      showToast("Login Success")
       window.open(`/profile/me`, '_self');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');

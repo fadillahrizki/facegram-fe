@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router';
 import api from '../api/api';
 import { useEffect, useRef, useState } from 'react';
 import Loading from './Loading';
+import { showToast } from './Toast';
 
 export default function Navbar() {
   const [notifications, setNotifications] = useState([]);
@@ -15,6 +16,7 @@ export default function Navbar() {
     api.post('/auth/logout')
       .then(() => {
         localStorage.clear();
+        showToast("Logout Success")
         window.location.href = '/login';
       })
       .catch(err => {

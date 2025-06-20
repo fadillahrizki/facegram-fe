@@ -1,12 +1,13 @@
-import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
+import { EllipsisHorizontalIcon, HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import { ChatBubbleOvalLeftIcon, HeartIcon as HeartOutline } from "@heroicons/react/24/outline";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router";
 import api from "../api/api";
 import { useState } from "react";
 import Loading from "./Loading";
+import { showToast } from "./Toast";
 
-export default function Post({ post }) {
+export default function Post({ removedPost, post }) {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -29,8 +30,10 @@ export default function Post({ post }) {
   const [user] = useState(JSON.parse(localStorage.getItem("user")))
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingAction, setLoadingAction] = useState(false);
   const [liked, setLiked] = useState(post.likes.find(like=>like.user_id==user.id))
   const [showComment, setShowComment] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleLike = async () => {
     try {
@@ -66,17 +69,54 @@ export default function Post({ post }) {
       setLoading(false)
     }
   }
+
+  const handlePostDelete = async () => {
+    setLoadingAction(true)
+    try {
+      await api.delete(`/posts/${post.id}`)
+      showToast("Success to delete post")
+      removedPost(post)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
     
   return (
     <>
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="px-5 py-3 flex items-center justify-between">
+          <div className='flex gap-2 items-center'>
+            <div className={"flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-600 rounded-full"}>
+                <span className="font-medium text-gray-100 h-full text-center flex items-center">
+                {(
+                    post.user.profile_picture ? <img className='h-full object-cover object-center' src={`${import.meta.env.VITE_STORAGE_URL}/${post.user.profile_picture.storage_path}`} alt={post.user.full_name} /> :  post.user.full_name[0].toUpperCase()
+                )}
+                </span>
+            </div>
+            <div>
+              <Link to={`/profile/${post.user.username}`} className="font-medium hover:underline">
+                  {post.user.username}
+              </Link>
+            </div>
+          </div>
+          {post.user.id == user.id  && (
+            <div className="relative">
+              <EllipsisHorizontalIcon className="w-6 h-6 cursor-pointer" onClick={()=>setMenuOpen(!menuOpen)} />
+              <div className={"absolute left-0 z-10 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black/5 " + (menuOpen ? "" : "hidden")}>
+                <button onClick={handlePostDelete} className="block px-4 py-2 text-sm rounded-md text-start text-red-500 cursor-pointer hover:bg-gray-100 w-full" disabled={loadingAction}>{loadingAction ? <Loading /> : 'Delete Post'}</button>
+              </div>
+            </div>
+          )}
+        </div>
           <Carousel responsive={responsive}>
               {post.attachments.map((attachment, index) => (
                   <img
                       key={index}
                       src={`${import.meta.env.VITE_STORAGE_URL}/${attachment.storage_path}`}
                       alt={`Post attachment ${index + 1}`}
-                      className="rounded-t-lg w-full max-h-96 object-cover"
+                      className="w-full max-h-96 object-cover"
                       loading="lazy"
                   />
               ))}

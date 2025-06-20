@@ -44,11 +44,15 @@ export default function NewsFeed() {
     if (node) observer.current.observe(node);
   }, [hasMore]);
 
+  const removedPost = (post) => {
+    setPosts(posts.filter(p=>p.id!=post.id))
+  }
+
   return (
     <>
     <Navbar />
     <div className="p-5 flex flex-col gap-4 max-w-sm mx-auto">
-      {posts.map((post, idx) => <div key={post.id} ref={idx === posts.length - 1 ? lastPostRef : null}><Post post={post} /></div>)}
+      {posts.map((post, idx) => <div key={post.id} ref={idx === posts.length - 1 ? lastPostRef : null}><Post removedPost={removedPost} post={post} /></div>)}
       {loading && (
         <div className="text-center mt-5"><Loading isScreen={true}/></div>
       )}
