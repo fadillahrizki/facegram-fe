@@ -44,6 +44,10 @@ export default function Post({ post }) {
     }
 
   }
+
+  function kFormatter(num) {
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K' : Math.sign(num)*Math.abs(num)
+  }
     
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -62,7 +66,7 @@ export default function Post({ post }) {
             <div className="flex gap-2 mb-2">
               <div className="flex gap-1 items-center text-sm text-gray-800" onClick={handleLike}> 
                 {liked ? <HeartSolid className="w-6 h-6" />  : <HeartOutline className="w-6 h-6" /> }
-                <span>{post.likes.length>0 ? post.likes.length : ''}</span> 
+                <span>{post.likes.length>0 ? kFormatter(post.likes.length) : ''}</span> 
               </div>
               {/* <div className="flex gap-1 items-center text-sm"> <ChatBubbleOvalLeftIcon className="w-6 h-6" /> <span>123</span> </div> */}
             </div>
