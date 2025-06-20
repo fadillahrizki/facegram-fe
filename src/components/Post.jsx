@@ -102,7 +102,7 @@ export default function Post({ post }) {
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-2">
         <ul className="divide-y divide-gray-200">
           {post.comments.map(comment => (
-              <li key={comment.user.id}>
+              <li key={comment.id}>
                   <div className="flex flex-col gap-1 py-2 px-5 text-sm">
                       <Link to={`/profile/${comment.user.username}`} className="font-medium text-gray-900 max-w-min truncate">{comment.user.username}</Link>
                       <p>{comment.content}</p>
@@ -111,7 +111,7 @@ export default function Post({ post }) {
           ))}
         </ul>
         <div className="py-2 px-5">
-          <textarea id="caption" name='caption' rows="4" className="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your comments here..." value={content} onChange={(e) => setContent(e.target.value)} />
+          <textarea id="caption" name='caption' rows="4" className="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your comments here..." disabled={loading} value={content} onChange={(e) => setContent(e.target.value)} />
           <button
             className={"rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 " + (loading ? "cursor-not-allowed" : "cursor-pointer")}
             disabled={loading}
