@@ -63,7 +63,7 @@ export default function Register() {
                   onChange={handleChange}
                 />
               </div>
-              {errors[field] && <div className="text-danger">{errors[field][0]}</div>}
+              {errors[field] && <div className="text-red-500 text-sm mt-2">{errors[field][0]}</div>}
             </div>
           ))}
 
