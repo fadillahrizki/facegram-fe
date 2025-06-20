@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import api from '../api/api';
 import Navbar from './Navbar';
 import Loading from './Loading';
@@ -64,6 +64,11 @@ export default function Profile() {
       {user && !loading && (
         <div className="p-4 flex flex-col gap-4 max-w-sm mx-auto">
           <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+            {user.is_your_account && (
+              <Link to={'/profile/me/edit'}>
+              <button className={"cursor-pointer mb-2 rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"} >Edit Profile</button>
+              </Link>
+            )}
             <h3 className="text-md font-bold tracking-tight text-gray-500">@{user.username}</h3>
             <h5 className='text-2xl font-bold tracking-tight text-gray-700'>{user.full_name}</h5>
             <p className="font-normal text-gray-700">{user.bio}</p>

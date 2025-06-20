@@ -3,6 +3,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
 import CreatePost from './components/CreatePost';
+import EditProfile from './components/EditProfile';
 import NewsFeed from './components/NewsFeed';
 import Notifications from './components/Notification';
 import Users from './components/Users';
@@ -24,6 +25,7 @@ export default function AppRoutes() {
         <Route path="/login" element={isLoggedIn ? <Navigate to="/profile/me" /> : <Login />} />
         <Route path="/register" element={isLoggedIn ? <Navigate to="/profile/me" /> : <Register />} />
         <Route path="/profile/:username" element={<RequireAuth><Profile /></RequireAuth>} />
+        <Route path="/profile/:username/edit" element={<RequireAuth><EditProfile /></RequireAuth>} />
         <Route path="/newsfeed" element={<RequireAuth><NewsFeed /></RequireAuth>} />
         <Route path="/create-post" element={<RequireAuth><CreatePost /></RequireAuth>} />
         <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
