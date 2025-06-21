@@ -4,6 +4,7 @@ import api from '../api/api';
 import Navbar from './Navbar';
 import Loading from './Loading';
 import Post from './Post';
+import { showToast } from './Toast';
 
 export default function Profile() {
   const { username } = useParams();
@@ -62,6 +63,7 @@ export default function Profile() {
       const res = await api.post('/users/update-profile-picture', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+      showToast("Success update profile picture")
       setUser({...user, ...{profile_picture: res.data.data}})
     } catch (err) {
       console.error(err)
