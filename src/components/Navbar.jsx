@@ -17,7 +17,9 @@ export default function Navbar() {
       .then(() => {
         localStorage.clear();
         showToast("Logout Success")
-        window.location.href = '/login';
+        setTimeout(()=>{
+          window.open(`/login`, '_self');
+        }, 3000)
       })
       .catch(err => {
         console.error('Logout failed', err);

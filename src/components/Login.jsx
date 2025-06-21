@@ -21,7 +21,9 @@ export default function Login() {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       showToast("Login Success")
-      window.open(`/profile/me`, '_self');
+      setTimeout(()=>{
+        window.open(`/profile/me`, '_self');
+      }, 3000)
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

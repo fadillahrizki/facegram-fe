@@ -24,7 +24,9 @@ export default function Register() {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       showToast("Register Success")
-      window.open(`/profile/me`, '_self');
+      setTimeout(()=>{
+        window.open(`/profile/me`, '_self');
+      }, 3000)
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors);
