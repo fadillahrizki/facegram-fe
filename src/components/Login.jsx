@@ -20,10 +20,9 @@ export default function Login() {
       const res = await api.post('/auth/login', form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
-      showToast("Login Success")
-      setTimeout(()=>{
+      showToast("Login Success").then(()=>{
         window.open(`/profile/me`, '_self');
-      }, 3000)
+      })
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

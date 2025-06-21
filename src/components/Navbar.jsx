@@ -16,10 +16,9 @@ export default function Navbar() {
     api.post('/auth/logout')
       .then(() => {
         localStorage.clear();
-        showToast("Logout Success")
-        setTimeout(()=>{
+        showToast("Logout Success").then(()=>{
           window.open(`/login`, '_self');
-        }, 3000)
+        })
       })
       .catch(err => {
         console.error('Logout failed', err);
