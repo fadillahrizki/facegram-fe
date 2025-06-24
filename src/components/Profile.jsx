@@ -97,8 +97,8 @@ export default function Profile() {
                 <button className={"cursor-pointer mb-2 rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"} >Edit Profile</button>
                 </Link>
               )}
-              <h3 className="text-md font-bold tracking-tight text-gray-500">@{user.username}</h3>
-              <h5 className='text-2xl font-bold tracking-tight text-gray-700'>{user.full_name}</h5>
+              <h3 className="text-md font-bold tracking-tight text-gray-500 text-wrap w-[75%]">@{user.username}</h3>
+              <h5 className='text-2xl font-bold tracking-tight text-gray-700 text-wrap w-[75%]'>{user.full_name}</h5>
               <p className="font-normal text-gray-700">{user.bio}</p>
               <div className="flex gap-3 text-gray-700">
                 <span><b>{user.posts_count}</b> Posts</span>
